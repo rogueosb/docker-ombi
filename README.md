@@ -3,4 +3,4 @@ A docker image for [PlexRequests.Net](https://github.com/tidusjar/PlexRequests.N
 
 #Usage
 
-    docker run -d -i -p "3579:3579" -v /your-config-location:/config rogueosb/plexrequestsnet
+    docker run -d -i --name plexrequestsnet --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/plexrequestsnet
