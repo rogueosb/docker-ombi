@@ -2,7 +2,7 @@ FROM mono:4.2.1.102
 
 MAINTAINER rogueosb@gmail.com
 
-ENV APTLIST="bzip2 libcurl4-openssl-dev wget unzip"
+ENV APTLIST="bzip2 libcurl4-openssl-dev wget unzip sqlite3"
 
 # install packages
 RUN apt-get update -q && \
