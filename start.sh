@@ -20,6 +20,15 @@ if [ ! -f /config/PlexRequests.sqlite ]; then
   sqlite3 PlexRequests.sqlite "create table aTable(field1 int); drop table aTable;" # create empty db
 fi
 
-ln -s /config/PlexRequests.sqlite /app/PlexRequests.Net/PlexRequests.sqlite
+# check for Backups folder in config
+if [ ! -d /config/Backup ]; then
+  echo "Creating Backup dir..."
+  mkdir /config/Backup
+fi
 
-mono /app/PlexRequests.Net/PlexRequests.exe
+
+ln -s /config/PlexRequests.sqlite /app/PlexRequests.Net/PlexRequests.sqlite
+ln -s /config/Backup /app/PlexRequests.Net/Backup
+
+cd /app/PlexRequests.Net
+mono PlexRequests.exe

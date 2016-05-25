@@ -7,6 +7,7 @@ ENV APTLIST="bzip2 libcurl4-openssl-dev wget unzip sqlite3"
 # install packages
 RUN apt-get update -q && \
 apt-get install $APTLIST -qy && \
+mozroots --import --ask-remove && \
 
 mkdir /app && \
 mkdir /config && \

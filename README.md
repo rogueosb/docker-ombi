@@ -7,3 +7,4 @@ A docker image for [PlexRequests.Net](https://github.com/tidusjar/PlexRequests.N
 
 ##Changes
 +**06/04/2016:** Fix for version 1.60 config location
++**25/05/2016:** Update for backups in 1.7.0
