@@ -1,6 +1,6 @@
 #!/bin/sh
 
-plex_remote="$(curl -sX GET https://api.github.com/repos/tidusjar/PlexRequests.Net/releases/latest | awk '/tag_name/{print $4;exit}' FS='[""]')"
+plex_remote="$(curl -sX GET https://api.github.com/repos/tidusjar/PlexRequests.Net/releases/latest | awk '/browser_download_url/{print $4;exit}' FS='[""]')"
 
 # check for original config file in app dir
 if [ -f /app/PlexRequests.Net/PlexRequests.sqlite && ! -f /config/PlexRequests.Net/PlexRequests.sqlite ]; then
@@ -8,7 +8,7 @@ if [ -f /app/PlexRequests.Net/PlexRequests.sqlite && ! -f /config/PlexRequests.N
 fi
 
 rm -rf /app/PlexRequests.Net
-curl -o /tmp/plexrequestsnet.zip -L https://github.com/tidusjar/PlexRequests.Net/releases/download/"$plex_remote"/PlexRequests.zip
+curl -o /tmp/plexrequestsnet.zip -L "$plex_remote"
 unzip -o /tmp/plexrequestsnet.zip -d /tmp
 
 mv /tmp/Release /app/PlexRequests.Net
