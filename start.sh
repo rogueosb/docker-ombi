@@ -8,7 +8,12 @@ if [ -f /app/PlexRequests.Net/PlexRequests.sqlite && ! -f /config/PlexRequests.N
 fi
 
 rm -rf /app/PlexRequests.Net
-curl -o /tmp/plexrequestsnet.zip -L "$plex_remote"
+
+if [ "$DEV" = "1" ]; then
+  python /get-dev.py
+else
+  curl -o /tmp/plexrequestsnet.zip -L "$plex_remote"
+fi
 unzip -o /tmp/plexrequestsnet.zip -d /tmp
 
 mv /tmp/Release /app/PlexRequests.Net

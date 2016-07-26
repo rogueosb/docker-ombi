@@ -2,7 +2,7 @@ FROM mono:4.2.3.4
 
 MAINTAINER rogueosb@gmail.com
 
-ENV APTLIST="bzip2 libcurl4-openssl-dev wget unzip sqlite3"
+ENV APTLIST="bzip2 libcurl4-openssl-dev wget unzip sqlite3 python2.7"
 
 # install packages
 RUN apt-get update -q && \
@@ -16,6 +16,7 @@ mkdir /config && \
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 ADD start.sh /start.sh
+ADD get-dev.py /get-dev.py
 RUN chmod +x /start.sh
 
 # ports and volumes
