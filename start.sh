@@ -38,4 +38,4 @@ ln -s /config/PlexRequests.sqlite /app/PlexRequests.Net/PlexRequests.sqlite
 ln -s /config/Backup /app/PlexRequests.Net/Backup
 
 cd /app/PlexRequests.Net
-mono PlexRequests.exe
+mono PlexRequests.exe "${RUN_OPTS}"
