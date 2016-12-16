@@ -1,6 +1,8 @@
 #!/bin/sh
 
-plex_remote="$(curl -sX GET https://api.github.com/repos/tidusjar/PlexRequests.Net/releases/latest | awk '/browser_download_url/{print $4;exit}' FS='[""]')"
+identifier="tidusjar/PlexRequests.Net"
+filename="PlexRequests.zip"
+output_path="/tmp/plexrequestsnet.zip"
 
 # check for original config file in app dir
 if [ -f /app/PlexRequests.Net/PlexRequests.sqlite && ! -f /config/PlexRequests.Net/PlexRequests.sqlite ]; then
@@ -12,7 +14,7 @@ rm -rf /app/PlexRequests.Net
 if [ "$DEV" = "1" ]; then
   python /get-dev.py
 else
-  curl -o /tmp/plexrequestsnet.zip -L "$plex_remote"
+  curl -s -L https://github.com/$identifier/releases/latest | egrep -o "/$identifier/releases/download/v[0-9\.]*/$filename" | wget --base=http://github.com/ -i - -O $output_path
 fi
 unzip -o /tmp/plexrequestsnet.zip -d /tmp
 
