@@ -1,6 +1,6 @@
 #!/bin/sh
 
-identifier="tidusjar/PlexRequests.Net"
+identifier="tidusjar/Ombi"
 filename="PlexRequests.zip"
 output_path="/tmp/plexrequestsnet.zip"
 
