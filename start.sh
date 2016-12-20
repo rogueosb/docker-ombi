@@ -12,14 +12,14 @@ else
   user_details="-u $API"
 fi
 
-plex_remote=$(curl $user_details -sX GET https://api.github.com/repos/$identifier/releases/latest | awk '/browser_download_url/{print $4;exit}' FS='[""]')
+ombi_remote=$(curl $user_details -sX GET https://api.github.com/repos/$identifier/releases/latest | awk '/browser_download_url/{print $4;exit}' FS='[""]')
 
 rm -rf /app/Ombi
 
 if [ "$DEV" = "1" ]; then
   python /get-dev.py
 else
-  curl -o $output_path -L "$plex_remote"
+  curl -o $output_path -L "$ombi_remote"
 fi
 
 unzip -o $output_path -d /tmp
