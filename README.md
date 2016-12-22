@@ -3,9 +3,9 @@ A docker image for [Ombi](https://github.com/tidusjar/Ombi).
 
 #Usage
 
-    docker run -d -i --name ombi --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/plexrequestsnet
+    docker run -d -i --name ombi --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/ombi
 
-To circumvent GitHub API rate limiting, you can use the environment label API as follows: `-e API=username:apikey`. You can get your Personal Access Token from [here](https://github.com/settings/tokens).
+To circumvent GitHub API rate limiting, you can use the environment label API by adding: `-e API=username:accesstoken` to your run command. You can get your Personal Access Token from [here](https://github.com/settings/tokens).
 
 If you would like to use the Dev branch (at your own risk!), add `-e DEV=1` to your run command.
 
