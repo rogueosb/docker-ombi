@@ -3,7 +3,7 @@ A docker image for [Ombi](https://github.com/tidusjar/Ombi).
 
 #Usage
 
-    docker run -d -i --name ombi --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/plexrequestsnet
+    docker run -d -i --name ombi --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/ombi
 
 If you would like to use the Dev branch (at your own risk!), add -e DEV=1 to your run command.
 
