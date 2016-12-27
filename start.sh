@@ -1,25 +1,31 @@
 #!/bin/sh
 
 identifier="tidusjar/Ombi"
-filename="PlexRequests.zip"
-output_path="/tmp/plexrequestsnet.zip"
+filename="Ombi.zip"
+output_path="/tmp/Ombi.zip"
+user_details=""
 
-# check for original config file in app dir
-if [ -f /app/PlexRequests.Net/PlexRequests.sqlite && ! -f /config/PlexRequests.Net/PlexRequests.sqlite ]; then
-  mv /app/PlexRequests.Net/PlexRequests.sqlite /config/PlexRequests.sqlite
+if [ -z ${API+x} ]; then 
+  echo "no API login used"
+else
+  echo "using provided API details"
+  user_details="-u $API"
 fi
 
-rm -rf /app/PlexRequests.Net
+ombi_remote=$(curl $user_details -sX GET https://api.github.com/repos/$identifier/releases/latest | awk '/browser_download_url/{print $4;exit}' FS='[""]')
+
+rm -rf /app/Ombi
 
 if [ "$DEV" = "1" ]; then
   python /get-dev.py
 else
-  curl -s -L https://github.com/$identifier/releases/latest | egrep -o "/$identifier/releases/download/v[0-9\.]*/$filename" | wget --base=http://github.com/ -i - -O $output_path
+  curl -o $output_path -L "$ombi_remote"
 fi
-unzip -o /tmp/plexrequestsnet.zip -d /tmp
 
-mv /tmp/Release /app/PlexRequests.Net
-rm /tmp/plexrequestsnet.zip
+unzip -o $output_path -d /tmp
+
+mv /tmp/Release /app/Ombi
+rm $output_path
 
 cd /config
 
@@ -34,8 +40,9 @@ if [ ! -d /config/Backup ]; then
 fi
 
 
-ln -s /config/PlexRequests.sqlite /app/PlexRequests.Net/PlexRequests.sqlite
-ln -s /config/Backup /app/PlexRequests.Net/Backup
+ln -s /config/PlexRequests.sqlite /app/Ombi/PlexRequests.sqlite
+ln -s /config/Backup /app/Ombi/Backup
 
-cd /app/PlexRequests.Net
-mono PlexRequests.exe "${RUN_OPTS}"
+cd /app/Ombi
+executable=$(ls | grep ".exe" | grep -v "Updater\|config")
+mono $executable "${RUN_OPTS}"
