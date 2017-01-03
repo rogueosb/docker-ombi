@@ -2,7 +2,7 @@
 
 identifier="tidusjar/Ombi"
 filename="Ombi.zip"
-output_path="/tmp/Ombi.zip"
+zip_path="/tmp/Ombi.zip"
 user_details=""
 
 if [ -z ${API+x} ]; then 
@@ -19,13 +19,13 @@ rm -rf /app/Ombi
 if [ "$DEV" = "1" ]; then
   python /get-dev.py
 else
-  curl -o $output_path -L "$ombi_remote"
+  curl -o $zip_path -L "$ombi_remote"
 fi
 
-unzip -o $output_path -d /tmp
+unzip -o $zip_path -d /tmp
 
 mv /tmp/Release /app/Ombi
-rm $output_path
+rm $zip_path
 
 cd /config
 
