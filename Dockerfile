@@ -1,4 +1,4 @@
-FROM mono:4.2.3
+FROM mono:4.6.2
 
 MAINTAINER rogueosb@gmail.com
 
