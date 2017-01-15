@@ -16,3 +16,4 @@ If you would like to use the Dev branch (at your own risk!), add `-e DEV=1` to y
 - **26/07/2016:** Add dev branch environment variable
 - **19/12/2016:** Changes to reflect new name (Ombi)
 - **20/12/2016:** Further changes for Ombi, added GitHub API login
+- **15/01/2017:** Changes for Ombi v2 (migrate db, new exe filename)
