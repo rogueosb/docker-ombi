@@ -5,7 +5,7 @@ filename="Ombi.zip"
 zip_path="/tmp/Ombi.zip"
 user_details=""
 
-if [ -z ${API+x} ]; then 
+if [ -z ${API+x} ]; then
   echo "no API login used"
 else
   echo "using provided API details"
@@ -48,5 +48,4 @@ ln -s /config/Ombi.sqlite /app/Ombi/Ombi.sqlite
 ln -s /config/Backup /app/Ombi/Backup
 
 cd /app/Ombi
-executable=$(ls | grep ".exe" | grep -v "Updater\|config")
-mono $executable "${RUN_OPTS}"
+mono Ombi.exe "${RUN_OPTS}"
