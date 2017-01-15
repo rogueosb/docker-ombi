@@ -29,8 +29,12 @@ rm $zip_path
 
 cd /config
 
-if [ ! -f /config/PlexRequests.sqlite ]; then
-  sqlite3 PlexRequests.sqlite "create table aTable(field1 int); drop table aTable;" # create empty db
+if [ ! -f /config/Ombi.sqlite ]; then
+  if [ -f /config/PlexRequests.sqlite ]; then # migrate existing db
+    mv /config/PlexRequests.sqlite /config/Ombi.sqlite
+  else
+    sqlite3 Ombi.sqlite "create table aTable(field1 int); drop table aTable;" # create empty db
+  fi
 fi
 
 # check for Backups folder in config
@@ -40,7 +44,7 @@ if [ ! -d /config/Backup ]; then
 fi
 
 
-ln -s /config/PlexRequests.sqlite /app/Ombi/PlexRequests.sqlite
+ln -s /config/Ombi.sqlite /app/Ombi/Ombi.sqlite
 ln -s /config/Backup /app/Ombi/Backup
 
 cd /app/Ombi
