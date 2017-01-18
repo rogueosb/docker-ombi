@@ -1,9 +1,15 @@
-#!/bin/sh
+#!/usr/bin/with-contenv bash
 
 identifier="tidusjar/Ombi"
 filename="Ombi.zip"
 zip_path="/tmp/Ombi.zip"
 user_details=""
+
+PUID=${PUID:-9001}
+PGID=${PGID:-9001}
+
+groupmod -o -g "$PGID" ombi
+usermod -o -u "$PUID" ombi
 
 if [ -z ${API+x} ]; then
   echo "no API login used"
@@ -43,9 +49,11 @@ if [ ! -d /config/Backup ]; then
   mkdir /config/Backup
 fi
 
-
 ln -s /config/Ombi.sqlite /app/Ombi/Ombi.sqlite
 ln -s /config/Backup /app/Ombi/Backup
 
+chown -R ombi:ombi /app
+chown -R ombi:ombi /config
+
 cd /app/Ombi
-mono Ombi.exe "${RUN_OPTS}"
+exec s6-setuidgid ombi mono Ombi.exe "${RUN_OPTS}"
