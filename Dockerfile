@@ -2,12 +2,11 @@ FROM mono:4.6.2
 
 MAINTAINER rogueosb@gmail.com
 
-ENV APTLIST="bzip2 libcurl4-openssl-dev wget unzip sqlite3 python2.7"
+ENV APTLIST="ca-certificates-mono bzip2 libcurl4-openssl-dev wget unzip sqlite3 python2.7"
 
 # install packages
 RUN apt-get update -q && \
 apt-get install $APTLIST -qy && \
-mozroots --import --ask-remove && \
 
 mkdir /app && \
 mkdir /config && \
@@ -20,6 +19,8 @@ curl -o \
 
 # clean up
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+
+RUN cert-sync /etc/ssl/certs/ca-certificates.crt
 
 RUN useradd -u 9001 -U -d /config -s /bin/false ombi && \
 usermod -G users ombi
