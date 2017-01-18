@@ -7,6 +7,8 @@ A docker image for [Ombi](https://github.com/tidusjar/Ombi).
 
 To circumvent GitHub API rate limiting, you can use the environment label API by adding: `-e API=username:accesstoken` to your run command. You can get your Personal Access Token from [here](https://github.com/settings/tokens).
 
+To run the container as another user, add `-e PUID=1000 -e PGID=1000` to your run command, changing the values to your desired IDs.
+
 If you would like to use the Dev branch (at your own risk!), add `-e DEV=1` to your run command.
 
 ##Changes
@@ -17,3 +19,4 @@ If you would like to use the Dev branch (at your own risk!), add `-e DEV=1` to y
 - **19/12/2016:** Changes to reflect new name (Ombi)
 - **20/12/2016:** Further changes for Ombi, added GitHub API login
 - **15/01/2017:** Changes for Ombi v2 (migrate db, new exe filename)
+- **18/01/2017:** Added support for PUID/PGID environment labels
