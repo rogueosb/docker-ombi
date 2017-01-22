@@ -58,7 +58,7 @@ chown -R ombi:ombi /config
 cd /app/Ombi
 
 if [ -z "$BASEURL" ]; then
-  exec s6-setuidgid ombi mono Ombi.exe -b "$BASEURL" "${RUN_OPTS}"
-else
   exec s6-setuidgid ombi mono Ombi.exe "${RUN_OPTS}"
+else
+  exec s6-setuidgid ombi mono Ombi.exe -b "$BASEURL" "${RUN_OPTS}"
 fi
