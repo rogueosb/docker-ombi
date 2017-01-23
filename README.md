@@ -5,11 +5,16 @@ A docker image for [Ombi](https://github.com/tidusjar/Ombi).
 
     docker run -d -i --name ombi --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/ombi
 
-To circumvent GitHub API rate limiting, you can use the environment label API by adding: `-e API=username:accesstoken` to your run command. You can get your Personal Access Token from [here](https://github.com/settings/tokens).
+###Environment Variables
+You can run the image with the following environment labels:
 
-To run the container as another user, add `-e PUID=1000 -e PGID=1000` to your run command, changing the values to your desired IDs.
+| Environment Label | Function |
+|-------------------|----------|
+| `-e DEV=1` OR `-e EAP=1` | Use the latest dev or Early Access Preview (EAP) build. |
+| `-e API=username:accesstoken` | Circumvent GitHub API rate limiting. <br>Use your GitHub username and a Personal Access Token from [here](https://github.com/settings/tokens). |
+| `-e PUID=1000`<br>`-e PGID=1000` | Set user and group ID to run container as. |
+| `-e RUN_OPTS="-base /ombi"` | Pass run commands to Ombi.exe in the container. Example given for baseurl setting. |
 
-If you would like to use the Dev branch (at your own risk!), add `-e DEV=1` to your run command.
 
 ##Changes
 - **06/04/2016:** Fix for version 1.60 config location
@@ -20,3 +25,4 @@ If you would like to use the Dev branch (at your own risk!), add `-e DEV=1` to y
 - **20/12/2016:** Further changes for Ombi, added GitHub API login
 - **15/01/2017:** Changes for Ombi v2 (migrate db, new exe filename)
 - **18/01/2017:** Added support for PUID/PGID environment labels
+- **23/01/2017:** Added EAP support (thanks, karbowiak!)
