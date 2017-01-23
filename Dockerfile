@@ -2,7 +2,7 @@ FROM mono:4.6.2
 
 MAINTAINER rogueosb@gmail.com
 
-ENV APTLIST="ca-certificates-mono bzip2 libcurl4-openssl-dev wget unzip sqlite3 python2.7"
+ENV APTLIST="ca-certificates-mono bzip2 libcurl4-openssl-dev wget unzip sqlite3 python"
 
 # install packages
 RUN apt-get update -q && \
@@ -27,6 +27,7 @@ usermod -G users ombi
 
 ADD start.sh /start.sh
 ADD get-dev.py /get-dev.py
+ADD get-eap.py /get-eap.py
 RUN chmod +x /start.sh
 
 # ports and volumes
