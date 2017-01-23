@@ -23,9 +23,14 @@ ombi_remote=$(curl $user_details -sX GET https://api.github.com/repos/$identifie
 rm -rf /app/Ombi
 
 if [ "$DEV" = "1" ]; then
-  python /get-dev.py
+  echo "Getting Development Version";
+  /usr/bin/python /get-dev.py
+elif [ "$EAP" = "1" ]; then
+  echo "Getting Early Access Preview";
+  /usr/bin/python /get-eap.py
 else
-  curl -o $zip_path -L "$ombi_remote"
+  echo "Getting Stable Version";
+  /usr/bin/curl -o $zip_path -L "$ombi_remote"
 fi
 
 unzip -o $zip_path -d /tmp
