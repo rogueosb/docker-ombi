@@ -1,11 +1,11 @@
-#Ombi Docker Image
+# Ombi Docker Image
 A docker image for [Ombi](https://github.com/tidusjar/Ombi).
 
-#Usage
+# Usage
 
     docker run -d -i --name ombi --restart=always -p "3579:3579" -v /your-config-location:/config rogueosb/ombi
 
-###Environment Variables
+### Environment Variables
 You can run the image with the following environment labels:
 
 | Environment Label | Function |
@@ -16,7 +16,7 @@ You can run the image with the following environment labels:
 | `-e RUN_OPTS="-base /ombi"` | Pass run commands to Ombi.exe in the container. Example given for baseurl setting. |
 
 
-##Changes
+## Changes
 - **06/04/2016:** Fix for version 1.60 config location
 - **25/05/2016:** Update for backups in 1.7.0
 - **01/07/2016:** Fix wrong download URL
