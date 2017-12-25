@@ -25,9 +25,9 @@ rm -rf /app/Ombi
 if [ "$DEV" = "1" ]; then
   echo "Getting Development Version";
   /usr/bin/python /get-dev.py
-elif [ "$EAP" = "1" ]; then
-  echo "Getting Early Access Preview";
-  /usr/bin/python /get-eap.py
+elif [ "$DNC" = "1" ]; then
+  echo "Getting OpenBeta DotNetCore Version";
+  /usr/bin/python /get-dnc.py
 else
   echo "Getting Stable Version";
   /usr/bin/curl -o $zip_path -L "$ombi_remote"

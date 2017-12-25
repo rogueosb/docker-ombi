@@ -10,7 +10,7 @@ You can run the image with the following environment labels:
 
 | Environment Label | Function |
 |-------------------|----------|
-| `-e DEV=1` OR `-e EAP=1` | Use the latest dev or Early Access Preview (EAP) build. |
+| `-e DEV=1` OR `-e OBDNC=1` | Use the latest dev or Open Beta DotNetCore (EAP) build. |
 | `-e API=username:accesstoken` | Circumvent GitHub API rate limiting. <br>Use your GitHub username and a Personal Access Token from [here](https://github.com/settings/tokens). |
 | `-e PUID=1000`<br>`-e PGID=1000` | Set user and group ID to run container as. |
 | `-e RUN_OPTS="-base /ombi"` | Pass run commands to Ombi.exe in the container. Example given for baseurl setting. |
