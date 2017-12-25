@@ -26,7 +26,7 @@ if [ "$DEV" = "1" ]; then
   echo "Getting Development Version";
   /usr/bin/python /get-dev.py
 elif [ "$EAP" = "1" ]; then
-  echo "Getting Early Access Preview";
+  echo "Getting OpenBeta Version";
   /usr/bin/python /get-eap.py
 else
   echo "Getting Stable Version";
