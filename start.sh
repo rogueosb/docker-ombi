@@ -26,7 +26,7 @@ if [ "$DEV" = "1" ]; then
   echo "Getting Development Version";
   /usr/bin/python /get-dev.py
 elif [ "$EAP" = "1" ]; then
-  echo "Getting OpenBeta Version";
+  echo "Getting OpenBeta DotNetCore Version";
   /usr/bin/python /get-dnc.py
 else
   echo "Getting Stable Version";
