@@ -27,7 +27,7 @@ if [ "$DEV" = "1" ]; then
   /usr/bin/python /get-dev.py
 elif [ "$EAP" = "1" ]; then
   echo "Getting OpenBeta Version";
-  /usr/bin/python /get-eap.py
+  /usr/bin/python /get-dnc.py
 else
   echo "Getting Stable Version";
   /usr/bin/curl -o $zip_path -L "$ombi_remote"
