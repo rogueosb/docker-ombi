@@ -7,7 +7,7 @@ import json
 apiurl = "https://ci.appveyor.com/api/projects/tidusjar/requestplex"
 headers = {"Content-Type":"application/json"}
 
-request = urllib2.Request(apiurl + "/history?recordsNumber=10&branch=eap")
+request = urllib2.Request(apiurl + "/history?recordsNumber=10&branch=DotNetCore")
 
 for key,value in headers.items():
   request.add_header(key,value)
