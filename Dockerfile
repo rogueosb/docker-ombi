@@ -27,7 +27,7 @@ usermod -G users ombi
 
 ADD start.sh /start.sh
 ADD get-dev.py /get-dev.py
-ADD get-eap.py /get-eap.py
+ADD get-beta.py /get-beta.py
 RUN chmod +x /start.sh
 
 # ports and volumes
