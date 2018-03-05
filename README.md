@@ -26,3 +26,4 @@ You can run the image with the following environment labels:
 - **15/01/2017:** Changes for Ombi v2 (migrate db, new exe filename)
 - **18/01/2017:** Added support for PUID/PGID environment labels
 - **23/01/2017:** Added EAP support (thanks, karbowiak!)
+- **05/03/2018:** Updated to support Ombi v3

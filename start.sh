@@ -1,8 +1,8 @@
 #!/usr/bin/with-contenv bash
 
 identifier="tidusjar/Ombi"
-filename="Ombi.zip"
-zip_path="/tmp/Ombi.zip"
+filename="linux.tar.gz"
+zip_path="/tmp/linux.tar.gz"
 user_details=""
 
 PUID=${PUID:-9001}
@@ -18,9 +18,10 @@ else
   user_details="-u $API"
 fi
 
-ombi_remote=$(curl $user_details -sX GET https://api.github.com/repos/$identifier/releases/latest | awk '/browser_download_url/{print $4;exit}' FS='[""]')
+ombi_latest=$(curl $user_details -sX GET https://api.github.com/repos/$identifier/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
 rm -rf /app/Ombi
+mkdir -p /app/Ombi
 
 if [ "$DEV" = "1" ]; then
   echo "Getting Development Version";
@@ -29,36 +30,18 @@ elif [ "$EAP" = "1" ]; then
   echo "Getting Early Access Preview";
   /usr/bin/python /get-eap.py
 else
-  echo "Getting Stable Version";
-  /usr/bin/curl -o $zip_path -L "$ombi_remote"
+  echo "Getting Stable Version ($ombi_latest)";
+  /usr/bin/curl -o $zip_path -L  "https://github.com/tidusjar/Ombi/releases/download/$ombi_latest/linux.tar.gz"
 fi
 
-unzip -o $zip_path -d /tmp
+echo "Unzipping...";
+tar xfz $zip_path -C /app/Ombi
 
-mv /tmp/Release /app/Ombi
 rm $zip_path
-
-cd /config
-
-if [ ! -f /config/Ombi.sqlite ]; then
-  if [ -f /config/PlexRequests.sqlite ]; then # migrate existing db
-    mv /config/PlexRequests.sqlite /config/Ombi.sqlite
-  else
-    sqlite3 Ombi.sqlite "create table aTable(field1 int); drop table aTable;" # create empty db
-  fi
-fi
-
-# check for Backups folder in config
-if [ ! -d /config/Backup ]; then
-  echo "Creating Backup dir..."
-  mkdir /config/Backup
-fi
-
-ln -s /config/Ombi.sqlite /app/Ombi/Ombi.sqlite
-ln -s /config/Backup /app/Ombi/Backup
+chmod +x /app/Ombi/Ombi
 
 chown -R ombi:ombi /app
 chown -R ombi:ombi /config
 
 cd /app/Ombi
-exec s6-setuidgid ombi mono Ombi.exe "${RUN_OPTS}"
+exec s6-setuidgid ombi /app/Ombi/Ombi --storage "/config" --host http://*:3579 ${RUN_OPTS}

@@ -20,7 +20,7 @@ for build in json1["builds"]:
   if build["status"] == "success":
     request = urllib2.Request(apiurl + "/build/" + str(build["version"]))
     json2 = json.loads(urllib2.urlopen(request).read())
-    with open('/tmp/Ombi.zip','wb') as f:
-      f.write(urllib2.urlopen("https://ci.appveyor.com/api/buildjobs/" + json2["build"]["jobs"][0]["jobId"] + "/artifacts/Ombi.zip").read())
+    with open('/tmp/linux.tar.gz','wb') as f:
+      f.write(urllib2.urlopen("https://ci.appveyor.com/api/buildjobs/" + json2["build"]["jobs"][0]["jobId"] + "/artifacts/linux.tar.gz").read())
       f.close()
     break
