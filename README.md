@@ -1,3 +1,5 @@
+*NOTE: This repo is no longer maintained and will not be updated.*
+
 # Ombi Docker Image
 A docker image for [Ombi](https://github.com/tidusjar/Ombi).
 
